@@ -47,4 +47,12 @@ class UserModel extends BaseModel
   protected $afterFind      = [];
   protected $beforeDelete   = ['beforeDelete'];
   protected $afterDelete    = [];
+
+  public $logName = false;
+  public $logId = true;
+
+  public function getRoles()
+  {
+    return $this->db->table('roles')->get()->getResultArray();
+  }
 }
