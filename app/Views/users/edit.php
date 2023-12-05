@@ -64,7 +64,7 @@
                 <label for="role_id">Role</label>
                 <select name="role_id" id="role_id" class="form-control <?= ($error = validation_show_error('role_id')) ? 'border-danger' : ''; ?>">
                   <?php foreach ($role as $d) : ?>
-                    <?php if ($data['role_id']) : ?>
+                    <?php if ($d['id'] == $data['role_id']) : ?>
                       <option selected value="<?= $d['id']; ?>"><?= $d['title']; ?></option>
                     <?php else : ?>
                       <option value="<?= $d['id']; ?>"><?= $d['title']; ?></option>
