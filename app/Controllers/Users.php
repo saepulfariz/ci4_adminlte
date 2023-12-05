@@ -261,4 +261,74 @@ class Users extends BaseController
         }
         return redirect()->to($this->link);
     }
+
+    public function profile()
+    {
+        $data = [
+            'title' => 'My Profile',
+            'data' => getProfile()
+        ];
+
+        return view($this->view . '/profile', $data);
+    }
+
+    public function editProfile()
+    {
+        $data = [
+            'title' => 'Edit My Profile',
+            'data' => getProfile()
+        ];
+
+        return view($this->view . '/profile_edit', $data);
+    }
+
+    public function updateProfile()
+    {
+        $rules = [
+            'name'  => 'required|min_length[3]',
+            'email' => 'required|valid_email',
+        ];
+
+        $input = $this->request->getVar();
+
+        $dataUser = getProfile();
+
+        if ($input['email'] != $dataUser['email']) {
+            $rules['email'] = 'required|valid_email|is_unique[users.email]';
+        }
+
+        $dataBerkas = $this->request->getFile('image');
+
+        if ($dataBerkas->getError() != 4) {
+            $rules['image'] = 'uploaded[image]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/gif,image/png,image/webp]';
+        }
+
+        if (!$this->validateData($input, $rules)) {
+            return redirect()->back()->withInput();
+        }
+
+        $data = [
+            'email' => $this->request->getVar('email'),
+            'name' => $this->request->getVar('name'),
+        ];
+
+        if ($dataBerkas->getError() != 4) {
+            $fileName = $dataBerkas->getName();
+
+            if ($dataUser['image'] != 'user.png') {
+                @unlink($this->dir . '/' . $dataUser['image']);
+            }
+
+            $dataBerkas->move($this->dir, $fileName);
+            $data['image'] = $fileName;
+        }
+
+        $res = $this->model->update($dataUser['id'], $data);
+        if ($res) {
+            setAlert('success', 'Success', 'Update Success');
+        } else {
+            setAlert('warning', 'Warning', 'Update Failed');
+        }
+        return redirect()->to('profile');
+    }
 }
