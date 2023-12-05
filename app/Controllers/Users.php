@@ -331,4 +331,46 @@ class Users extends BaseController
         }
         return redirect()->to('profile');
     }
+
+    public function changePassword()
+    {
+        $data = [
+            'title' => 'Change Password',
+            'link' => 'change-password'
+        ];
+
+        return view($this->view . '/change_password', $data);
+    }
+
+
+    public function updatePassword()
+    {
+        $password_old = $this->request->getVar('password_old');
+        $password_new = $this->request->getVar('password_new');
+        $password_retype = $this->request->getVar('password_retype');
+
+        $dataRes = getProfile();
+
+        if (password_verify($password_old, $dataRes['password'])) {
+            if ($password_new == $password_retype) {
+                $data = [
+                    'password' => password_hash($password_new, PASSWORD_DEFAULT)
+                ];
+
+                $this->model->update($dataRes['id'], $data);
+
+                setAlert('success', 'Success', 'Password Changed Successfully');
+            } else {
+                setAlert('warning', 'Warning', 'The new password is not the same');
+            }
+        } else {
+            // setAlert('warning', 'Warning', 'The old password is different');
+            $data = [
+                'password_old' => 'The old password is different'
+            ];
+            return redirect()->back()->with('_ci_validation_errors', $data)->withInput();
+        }
+
+        return redirect()->to('change-password');
+    }
 }

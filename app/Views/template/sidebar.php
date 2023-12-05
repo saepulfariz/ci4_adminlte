@@ -54,7 +54,7 @@ $data_user = getProfile();
           </li>
 
         <?php endif; ?>
-        <li class="nav-item  <?= ($segment == 'profile' || $segment == 'gantipass') ? 'menu-open' : ''; ?>">
+        <li class="nav-item  <?= ($segment == 'profile' || $segment == 'change-password') ? 'menu-open' : ''; ?>">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
             <p>
@@ -72,7 +72,7 @@ $data_user = getProfile();
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url('gantipass'); ?>" class="nav-link <?= ($segment == 'gantipass') ? 'active' : ''; ?>">
+              <a href="<?= base_url('change-password'); ?>" class="nav-link <?= ($segment == 'change-password') ? 'active' : ''; ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>
                   Ganti Password
