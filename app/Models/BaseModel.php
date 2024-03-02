@@ -9,6 +9,7 @@ class BaseModel extends Model
   public $logName = false;
   public $logId = false;
   protected $returnType       = 'array';
+  public $logged = false;
 
   public function __construct()
   {
