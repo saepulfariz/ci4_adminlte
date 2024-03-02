@@ -11,7 +11,7 @@ Template login, register and dashboard AdminLTE
 - run composer install
 - rename env to .env
 - configure database connection in .env
-- make database ci3_adminlte
+- make database ci4_adminlte
 - php spark migrate
 - php spark db:seed all
 - running project with php spark serve or with apache/nginx web server
