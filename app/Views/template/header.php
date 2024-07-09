@@ -20,4 +20,6 @@
 
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?= base_url(); ?>public/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  
+  <?= $this->renderSection('head'); ?>
 </head>

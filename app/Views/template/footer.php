@@ -38,3 +38,6 @@
 
   }
 </script>
+
+
+<?= $this->renderSection('script'); ?>

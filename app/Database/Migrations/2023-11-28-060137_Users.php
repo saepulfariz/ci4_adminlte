@@ -45,6 +45,7 @@ class Users extends Migration
             'is_active' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
+				'default' => 1
             ],
             'cid' => [
                 'type'           => 'INT',
