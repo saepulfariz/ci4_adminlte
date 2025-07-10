@@ -18,14 +18,16 @@ $data_user = getProfile();
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
       <div class="image">
         <img src="<?= base_url(); ?>public/assets/uploads/users/<?= $data_user['image']; ?>" class="img-circle elevation-2" alt="User Image">
       </div>
-      <div class="info">
-        <a href="#" class="d-block text-capitalize"><?= $data_user['username']; ?> - <?= $data_user['title']; ?></a>
+      <div class="info" style="padding-bottom: 0px">
+        <a href="#" class="d-block text-capitalize"><?= $data_user['name']; ?></a>
+        <small class="text-white"><?= $data_user['title']; ?></small>
       </div>
     </div>
+
 
 
 
