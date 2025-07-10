@@ -182,8 +182,11 @@ class Users extends BaseController
             'email' => htmlspecialchars($this->request->getVar('email')),
             'username' => htmlspecialchars($this->request->getVar('username')),
             'role_id' => htmlspecialchars($this->request->getVar('role_id')),
-            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
         ];
+
+        if ($input['password'] != '') {
+            $data['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+        }
 
         if ($dataBerkas->getError() != 4) {
 
